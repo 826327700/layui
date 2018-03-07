@@ -2,7 +2,7 @@
     "import":{
         "css":{
             "target":"<%css-scoped%>",
-            "list":["css/main.css","https://123.com/all.css"]
+            "list":["framework/layui/css/layui.css","css/main.css"]
         },
         "js":{
             "target":"<%js-scoped%>",
