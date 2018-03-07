@@ -1,0 +1,19 @@
+{
+    "import":{
+        "css":{
+            "target":"<%css-scoped%>",
+            "list":["css/main.css","https://123.com/all.css"]
+        },
+        "js":{
+            "target":"<%js-scoped%>",
+            "list":["js/common.js","framework/layui/layui.js"]
+        }
+    },
+    "variable":{
+        "targetStart":"{{",
+        "targetEnd":"}}",
+        "word":{
+            "test":"测试全局变量"
+        }
+    }
+}
