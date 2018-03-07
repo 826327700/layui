@@ -12,7 +12,7 @@ gulp.task('sass', function () {
     gulp.src('src/css/*.scss') 
         .pipe(sass())
         .pipe(autoprefixer({
-            browsers: ['last 10 Chrome versions', 'last 5 Firefox versions', 'Safari >= 6', 'ie > 8'],
+            browsers: ['last 10 Chrome versions', 'last 5 Firefox versions', 'Safari >= 6', 'ie >= 8'],
             cascade: true, //是否美化属性值 默认：true 像这样：
             //-webkit-transform: rotate(45deg);
             //        transform: rotate(45deg);
@@ -61,11 +61,10 @@ gulp.task('copyFrameWork', function(){
 
 gulp.task('default',['sass','taskES6','compressIMG','copyHTML','copyFrameWork']);
 
-gulp.task('dev', ['sass'], function() {
+gulp.task('dev', ['default'], function() {
     browserSync.init({
         server:{
             baseDir: "./dist",
-            index: "html/index.html"
         },
         port: 8081
     });
@@ -73,5 +72,6 @@ gulp.task('dev', ['sass'], function() {
     gulp.watch("src/css/**/*.scss", ['sass']);
     gulp.watch("src/html/**/*.html",['copyHTML']);
     gulp.watch("src/js/**/*.js",['taskES6']);
+    gulp.watch("src/images/*.*",['compressIMG']);
 });
     

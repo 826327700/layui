@@ -1,0 +1,135 @@
+// 变量定义
+$page-background:#f5f5f5;
+$theme-color:#3b74b9;
+$default-text-color:#333;
+
+//混合共用代码块
+@mixin flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+body{
+    background: $page-background
+}
+
+.login-wrap{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    @include flex-center;
+    .login-form{
+        width: 280px;
+        min-height:300px;
+        .layui-form{
+            margin-top: 20px;
+            .layui-input{
+                background: #fff;
+            }
+            .layui-btn{
+                background-color:$theme-color; 
+            }
+        } 
+    }
+}
+.container{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.top-wrap{
+    background: $theme-color;
+    height: 60px;
+    color: #fff;
+    display: flex;
+    .logo{
+        @include flex-center;
+        width: 200px;
+        height: 100%;
+    }
+    .nav{
+        flex: 1;
+        padding: 0 40px;
+        display: flex;
+        a{
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            @include flex-center;
+            padding: 0 20px;
+            margin: 0 10px;
+            i{
+                font-size: 20px;
+                margin-bottom: 5px;
+            }
+            &:hover,
+            &.active{
+                background-color: rgba(255,255,255,0.2)
+            }
+        }
+    }
+}
+.body-wrap{
+    display: flex;
+    flex: 1;
+    .left-wrap{
+        background: #fff;
+        border-right: 1px solid #eee;
+        .layui-nav{
+            background: #fff;
+            color: $default-text-color;
+            .layui-nav-item{
+                background-color: #fff!important;
+                border-bottom: 1px solid #eee;
+                dl{
+                    background-color: #fff!important;
+                }
+                dd{
+                    border-top: 1px solid #eee;
+                    padding-left: 20px;
+                }
+                a{
+                    color: $default-text-color!important;
+                    i{
+                        margin-right: 10px
+                    }
+                    &:hover{
+                        background-color: #fff;
+                        color: $theme-color!important
+                    }
+                }
+            }
+            .layui-nav-bar{
+                background-color:$theme-color
+            }
+        }
+    }
+    .container-wrap{
+        flex: 1;
+        .breadcrumb-bar{
+            background-color: #fff;
+            border-bottom:1px solid #eee;
+            height: 45px;
+            display: flex;
+            .collapse-button{
+                width: 45px;
+                height: 100%;
+                border-right: 1px solid #eee;
+                cursor: pointer;
+                color: $default-text-color;
+                @include flex-center;
+                &:hover{
+                    color:$theme-color
+                }
+            }
+            .breadcrumb-wrap{
+                display: flex;
+                align-items: center;
+                padding: 0 20px;
+            }
+        }
+    }
+}

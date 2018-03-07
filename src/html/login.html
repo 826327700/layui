@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <%css-scoped%>
+    <title>{{test}}</title>
+</head>
+
+<body>
+    <div class="login-wrap">
+        <div class="login-form">
+            <div class="login-logo">
+                <img src="../images/login_logo.png" alt="">
+            </div>
+            <form action="./index.html" class="layui-form">
+                <div class="layui-form-item">
+                    <input type="text" class="layui-input" lay-verify="required" placeholder="用户名">
+                </div>
+                <div class="layui-form-item">
+                    <input type="text" class="layui-input" lay-verify="required" placeholder="密码">
+                </div>
+                <div class="layui-form-item">
+                    <button class="layui-btn layui-btn-fluid" lay-filter="login" lay-submit>登录</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!--引入js-->
+    <%js-scoped%>
+    <script>
+        layui.use('form', function(){
+            var form = layui.form;
+            
+        })
+    </script>
+</body>
+
+</html>

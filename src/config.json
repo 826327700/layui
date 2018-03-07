@@ -2,7 +2,11 @@
     "import":{
         "css":{
             "target":"<%css-scoped%>",
-            "list":["framework/layui/css/layui.css","css/main.css"]
+            "list":[
+                "framework/layui/css/layui.css",
+                "https://at.alicdn.com/t/font_580083_33iimkannmefusor.css",
+                "css/main.css"
+            ]
         },
         "js":{
             "target":"<%js-scoped%>",
