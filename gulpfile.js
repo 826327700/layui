@@ -12,7 +12,7 @@ gulp.task('sass', function () {
     gulp.src('src/css/*.scss') 
         .pipe(sass())
         .pipe(autoprefixer({
-            browsers: ['last 10 Chrome versions', 'last 5 Firefox versions', 'Safari >= 6', 'ie >= 8'],
+            browsers: ['last 4 versions'],
             cascade: true, //是否美化属性值 默认：true 像这样：
             //-webkit-transform: rotate(45deg);
             //        transform: rotate(45deg);
