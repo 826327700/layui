@@ -4,7 +4,8 @@ autoprefixer = require('gulp-autoprefixer'),
 gulp = require('gulp'),
 babel = require('gulp-babel'),
 imagemin = require('gulp-imagemin'),
-replace=require('./replace.js'),
+replace=require('./replace.js').modify,
+setThemeColor=require('./replace.js').setThemeColor,
 browserSync = require('browser-sync').create(),
 reload = browserSync.reload;
 
@@ -56,8 +57,10 @@ gulp.task('copyHTML', function(){
 
 gulp.task('copyFrameWork', function(){
     gulp.src('src/framework/**/*')
+    .pipe(setThemeColor())
     .pipe(gulp.dest('dist/framework'));
 });
+
 
 gulp.task('default',['sass','taskES6','compressIMG','copyHTML','copyFrameWork']);
 

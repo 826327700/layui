@@ -1,15 +1,5 @@
-// 变量定义
-$page-background:#f5f5f5;
-$theme-color:#3b74b9;
-$default-text-color:#333;
 
-//混合共用代码块
-@mixin flex-center {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
+@import './common.scss';
 body{
     background: $page-background
 }
@@ -35,10 +25,27 @@ body{
 }
 .container{
     position: absolute;
-    height: 100%;
+    min-height: 100%;
     width: 100%;
     display: flex;
     flex-direction: column;
+}
+.browser-tip{
+    background: #333;
+    color: #fff;
+    padding: 10px 30px;
+    text-align: center;
+    position: relative;
+    a{
+        color: $theme-color;
+        text-decoration: underline;
+    }
+    i{
+        position: absolute;
+        right: 20px;
+        top: 10px;
+        cursor: pointer;
+    }
 }
 .top-wrap{
     background: $theme-color;
@@ -77,18 +84,47 @@ body{
     flex: 1;
     .left-wrap{
         background: #fff;
-        border-right: 1px solid #eee;
+        border-right: 1px solid $default-border-color;
+        width: 200px;
+        overflow: hidden;
+        transition: width 0.5s ease-in-out;
+        flex-shrink:0;
+        &.shrink{
+            width:50px;
+            .layui-nav-item{
+                width:50px;
+            }
+            a span{
+                display: none
+            }
+        }
         .layui-nav{
             background: #fff;
             color: $default-text-color;
             .layui-nav-item{
                 background-color: #fff!important;
-                border-bottom: 1px solid #eee;
+                border-bottom: 1px solid $default-border-color;
+                &.active{
+                    position: relative;
+                    a{
+                        color: $theme-color!important
+                    }
+                    &::before{
+                        content: "";
+                        height: 100%;
+                        width: 5px;
+                        position: absolute;
+                        left: 0;
+                        top: 0;
+                        background:$theme-color
+                    }
+                    
+                }
                 dl{
                     background-color: #fff!important;
                 }
                 dd{
-                    border-top: 1px solid #eee;
+                    border-top: 1px solid $default-border-color;
                     padding-left: 20px;
                 }
                 a{
@@ -109,15 +145,16 @@ body{
     }
     .container-wrap{
         flex: 1;
+        overflow: hidden;
         .breadcrumb-bar{
             background-color: #fff;
-            border-bottom:1px solid #eee;
+            border-bottom:1px solid $default-border-color;
             height: 45px;
             display: flex;
             .collapse-button{
                 width: 45px;
                 height: 100%;
-                border-right: 1px solid #eee;
+                border-right: 1px solid $default-border-color;
                 cursor: pointer;
                 color: $default-text-color;
                 @include flex-center;
@@ -131,5 +168,123 @@ body{
                 padding: 0 20px;
             }
         }
+        .main-wrap{
+            padding: 20px;
+            box-sizing: border-box;
+        }
     }
+}
+.panel{
+    background: #fff;
+    border:1px solid $default-border-color;
+    margin-bottom: 20px;
+    .panel-title{
+        padding: 10px;
+        border-bottom: 1px solid $default-border-color;
+        small{
+            font-size: 14px;
+            margin-left: 10px;
+        }
+        .panel-button{
+            float: right;
+            color: $sec-text-color;
+            font-size: 14px;
+            cursor: pointer;
+            &:hover{
+                color: $default-text-color;
+            }
+        }
+    }
+    .panel-body{
+        padding: 20px 10px;
+        &.flex{
+            display: flex;
+        }
+        span+span{
+            margin-left: 20px;
+        }
+        .card{
+            border-radius: 3px;
+            padding: 20px;
+            color: #fff;
+            flex: 1;
+            &+.card{
+                margin-left: 10px;
+            }
+            @mixin icon-bg {
+                font-family: "iconfont" !important;
+                font-size: 50px;
+                font-style: normal;
+                -webkit-font-smoothing: antialiased;
+                position: absolute;
+                right: 30px;
+                top: 50%;
+                transform: translateY(-50%);
+                opacity: 0.6
+            }
+            &.color-1{
+                background: $assist-color1;
+                position: relative;
+                &::before{
+                    @include icon-bg;
+                    content: "\e634";
+                }
+            }
+            &.color-2{
+                background: $assist-color2;
+                position: relative;
+                &::before{
+                    @include icon-bg;
+                    content: "\e711";
+                }
+            }
+            &.color-3{
+                background: $assist-color3;
+                position: relative;
+                &::before{
+                    @include icon-bg;
+                    content: "\e600";
+                }
+            }
+            .big{
+                font-size: 30px;
+                margin: 15px 0
+            }
+            .footer{
+                display: flex;
+                justify-content:space-between;
+            }
+        }
+    }
+}
+.spec-check-box{
+    border: 1px solid $default-border-color;
+    .row{
+        padding: 5px 0;
+        .row-label{
+            display: inline-block;
+            min-width: 70px;
+            text-align: right;
+            margin-right: 10px;
+        }
+    }
+}
+.pro-color{
+    color: $pro-text-color
+}
+.gray-color{
+    color: $sec-text-color
+}
+.clear-margin{
+    margin: 0!important
+}
+.text-16{
+    font-size: 16px;
+}
+.white-bg{
+    background: #fff
+}
+.card-wrap{
+    background: #fff;
+    border: 1px solid $default-border-color
 }

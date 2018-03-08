@@ -1,37 +1,66 @@
 'use strict'
 var through2 = require('through2');
 var fs=require('fs');
-module.exports = modify;
-function modify(){
-    return through2.obj(function(file, encoding, cb){
-        //如果文件为空，不做任何操作，转入下一个操作，即下一个pipe
-        if(file.isNull()){
+var plugins={
+    modify:function(){
+        return through2.obj(function(file, encoding, cb){
+            //如果文件为空，不做任何操作，转入下一个操作，即下一个pipe
+            if(file.isNull()){
+                this.push(file);
+                return cb();
+            }
+            //插件不支持对stream直接操作，抛出异常
+            if(file.isStream()){
+                this.emit('error');
+                return cb();
+            }
+            
+            var p=file.path.replace(__dirname+'\\src\\html\\','').split('\\')
+            var path=''
+            p.forEach(()=>{
+                path=path+'../'
+            })
+            //内容转换，处理好后，再转成Buffer形式
+            var content = replace(file.contents.toString(),path);
+            file.contents = new Buffer(content);
+            //下面这两句基本是标配，可参考through2的API
             this.push(file);
-            return cb();
-        }
-        //插件不支持对stream直接操作，抛出异常
-        if(file.isStream()){
-            this.emit('error');
-            return cb();
-        }
-        
-        var p=file.path.replace(__dirname+'\\src\\html\\','').split('\\')
-        var path=''
-        p.forEach(()=>{
-            path=path+'../'
+            cb();
+        });
+    },
+    setThemeColor:function(){
+        return through2.obj(function(file, encoding, cb){
+            //如果文件为空，不做任何操作，转入下一个操作，即下一个pipe
+            if(file.isNull()){
+                this.push(file);
+                return cb();
+            }
+            //插件不支持对stream直接操作，抛出异常
+            if(file.isStream()){
+                this.emit('error');
+                return cb();
+            }
+            var extName=file.path.substring(file.path.lastIndexOf('.'),file.path.length)
+            if(extName.includes('.css')){
+                var config=JSON.parse(getConfig())
+                var content = file.contents.toString();
+                config.theme.forEach((item)=>{
+                    var exp=`/${item.a}/g`
+                    content=content.replace(eval(exp),item.b)
+                })
+                file.contents = new Buffer(content);
+            }
+            
+            //下面这两句基本是标配，可参考through2的API
+            this.push(file);
+            cb();
         })
-        //内容转换，处理好后，再转成Buffer形式
-        var content = replace(file.contents.toString(),path);
-        file.contents = new Buffer(content);
-        //下面这两句基本是标配，可参考through2的API
-        this.push(file);
-        cb();
-    });
+    }
 }
+
 function replace(data,path){
     //插入css和js
-    var configPath=`${__dirname}/src/config.json`
-    var config=fs.readFileSync(configPath, 'utf-8');
+    var config=getConfig()
     var css=JSON.parse(config).import.css
     var js=JSON.parse(config).import.js
     var csslinks=''
@@ -65,3 +94,10 @@ function replace(data,path){
     }
     return data
 }
+function getConfig(){
+    var configPath=`${__dirname}/src/config.json`
+    var config=fs.readFileSync(configPath, 'utf-8');
+    return config
+}
+
+module.exports = plugins;

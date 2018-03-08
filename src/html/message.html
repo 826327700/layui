@@ -60,10 +60,10 @@
                             </dd>
                         </dl>
                     </li> -->
-                    <li class="layui-nav-item active">
+                    <li class="layui-nav-item ">
                         <a href=""><i class="iconfont icon-shouye"></i><span>首页</span></a>
                     </li>
-                    <li class="layui-nav-item">
+                    <li class="layui-nav-item active">
                         <a href=""><i class="iconfont icon-xiaoxi"></i><span>系统消息</span></a>
                     </li>
                 </ul>
@@ -74,50 +74,27 @@
                     <div class="breadcrumb-wrap">
                         <span class="layui-breadcrumb">
                             <a><cite>工作台</cite></a>
-                            <a><cite>首页</cite></a>
+                            <a><cite>系统消息</cite></a>
                         </span>
                     </div>
                 </div>
                 <div class="main-wrap">
                     <div class="panel">
                         <div class="panel-title">
-                            <span class="text-16">待办事项</span>
-                            <small class="gray-color">您有<span class="pro-color">30</span>件工作待处理！</small>
-                            <span class="panel-button">收起</span>
+                            <div class="layui-form">
+                                <div class="layui-form-item clear-margin">
+                                    <label class="layui-form-label">状态</label>
+                                    <div class="layui-input-block">
+                                    <input type="radio" name="status" value="1" title="全部" checked>
+                                    <input type="radio" name="status" value="2" title="未读">
+                                    <input type="radio" name="status" value="3" title="已读">
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="panel-body">
-                            <span>待付款订单：<span class="pro-color">30</span></span>
-                            <span>待付款订单：<span class="pro-color">30</span></span>
-                        </div>
-                    </div>
-                    <div class="panel">
-                        <div class="panel-title">
-                            <span class="text-16">运营概况</span>
-                        </div>
-                        <div class="panel-body flex">
-                            <div class="card color-1">
-                                <div class="head">新增订单数</div>
-                                <div class="big">130</div>
-                                <div class="footer">
-                                    <span>成交转化率：65%</span>
-                                    <span>退款率：5%</span>
-                                </div>
-                            </div>
-                            <div class="card color-2">
-                                <div class="head">销售额</div>
-                                <div class="big">¥88965.00</div>
-                                <div class="footer">
-                                    <span>销售量：896</span>
-                                    <span>平均客单价：69</span>
-                                </div>
-                            </div>
-                            <div class="card color-3">
-                                <div class="head">新上架商品数</div>
-                                <div class="big">896</div>
-                                <div class="footer">
-                                    <span>已上架商品总数：655</span>
-                                </div>
-                            </div>
+                            <button class="layui-btn layui-btn-primary">标记已读</button>
+                            <table id="message-table" lay-filter="test"></table>
                         </div>
                     </div>
                 </div>
@@ -127,11 +104,39 @@
     <!--引入js-->
     <%js-scoped%>
     <script>
-        layui.use(['element','jquery'], function(){
-            var element = layui.element;
-            var $=layui.$;
-            //…
-        });
+        layui.use(['jquery','table'], function(){
+            var table = layui.table;
+            var data=[]
+            //模拟数据
+            for(var i=0;i<41;i++){
+                data.push({
+                    status:'未读',
+                    type:'资料修改',
+                    title:'亲，您的个人信息修改成功！',
+                    name:'系统',
+                    date:'2018-03-08 11:56'
+                })
+            }
+            //实例表格
+            var tableOptions={
+              elem: '#message-table'
+              ,skin:'line'
+              ,limit:20
+              ,data:data//数据
+              ,page: true //开启分页
+              ,cols: [[ //表头
+                {type:'checkbox',fixed: 'left'}
+                ,{type:'numbers', title: '序号', width:80, sort: true}
+                ,{field: 'status', title: '状态', width:120,sort: true}
+                ,{field: 'type', title: '业务类型', width:180, sort: true}
+                ,{field: 'title', title: '通知消息'} 
+                ,{field: 'name', title: '发送人', width: 180}
+                ,{field: 'date', title: '发送时间', width: 180, sort: true}
+              ]]
+            }
+            var tableIns=table.render(tableOptions);
+            
+        })
     </script>
 </body>
 

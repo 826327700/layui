@@ -1,0 +1,29 @@
+@import './common.scss';
+//本文件用于替换layui默认样式
+.layui-form-radio>i:hover, .layui-form-radioed>i{
+    color: $theme-color
+}
+.layui-form-checked[lay-skin=primary] i{
+    background:$theme-color;
+    background-color:$theme-color;
+    border-color:$theme-color;
+    color: #fff
+}
+.layui-form-checkbox[lay-skin=primary]:hover i {
+    border-color: $theme-color;
+    color: #fff;
+}
+.layui-btn-primary:hover{
+    border-color: $theme-color;
+    color: $theme-color;
+}
+.layui-laypage .layui-laypage-curr .layui-laypage-em{
+    background-color: $theme-color;
+}
+.layui-btn.layui-btn-default{
+    background-color:$theme-color;
+}
+.layui-layer-btn .layui-layer-btn0{
+    border-color: #fb7c15!important;
+    background-color: #fb7c15!important;
+}

@@ -4,13 +4,17 @@
             "target":"<%css-scoped%>",
             "list":[
                 "framework/layui/css/layui.css",
-                "https://at.alicdn.com/t/font_580083_33iimkannmefusor.css",
-                "css/main.css"
+                "https://at.alicdn.com/t/font_580083_mfi9klfwl45z5mi.css",
+                "css/main.css",
+                "css/replace.css"
             ]
         },
         "js":{
             "target":"<%js-scoped%>",
-            "list":["js/common.js","framework/layui/layui.js"]
+            "list":[
+                "framework/layui/layui.js",
+                "js/common.js"
+            ]
         }
     },
     "variable":{
@@ -19,5 +23,12 @@
         "word":{
             "test":"测试全局变量"
         }
-    }
+    },
+    "theme":[{
+        "a":"#009688",
+        "b":"#3b74b9"
+    },{
+        "a":"#5FB878",
+        "b":"#3b74b9"
+    }]
 }
